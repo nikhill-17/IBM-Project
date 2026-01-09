@@ -41,7 +41,7 @@
 
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -141,10 +141,6 @@
                 <div class="kpi-label">Average Rating</div>
                 <div class="kpi-value" id="avgRating">0.0</div>
             </div>
-            <div class="kpi-card">
-                <div class="kpi-label">Net Promoter Score (Est)</div>
-                <div class="kpi-value" id="npsScore">0</div>
-            </div>
         </div>
 
         <div class="charts-grid">
@@ -195,13 +191,8 @@
         const sum = feedbackData.reduce((acc, curr) => acc + (parseInt(curr.rating) || 0), 0);
         const avg = total > 0 ? (sum / total).toFixed(1) : 0;
 
-        const promoters = feedbackData.filter(i => i.rating == 5).length;
-        const detractors = feedbackData.filter(i => i.rating <= 3).length;
-        const nps = total > 0 ? Math.round(((promoters - detractors) / total) * 100) : 0;
-
         document.getElementById('totalCount').textContent = total;
         document.getElementById('avgRating').textContent = avg;
-        document.getElementById('npsScore').textContent = nps;
 
         const starCounts = [0, 0, 0, 0, 0];
         feedbackData.forEach(item => {
